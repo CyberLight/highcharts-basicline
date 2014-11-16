@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>polymer-highcharts-basicline</title>
+
+  <script src="../../webcomponentsjs/webcomponents.js"></script>
+  <link rel="import" href="../../polymer-test-tools/tools.html">
+  <script src="../../polymer-test-tools/htmltest.js"></script>
+
+  <!-- Step 1: import the element to test -->
+  <link rel="import" href="../highcharts-basicline.html">
+
+</head>
+<body>
+
+<highcharts-basicline width='50%'
+                      height='400px'
+                      charttitle='Monthly Average Temperature'
+                      subtitle='Source: weather.com'
+                      xcategories='[ "Jan", "Feb", "Mar" ]'
+                      ytitle='Temperature (°C)'
+                      tooltip='{ "valueSuffix": "°C" }'
+                      data='temperatures_test.json'>
+
+</highcharts-basicline>
+
+  <script>
+
+    document.addEventListener('polymer-ready', function() {
+      var chartsElement = document.querySelector('highcharts-basicline');
+      var data = [{ "name": "Tokyo", "data": [ 7.0, 6.9, 9.5 ] },
+                       { "name": "Moscow", "data": [ 4.0, 10.9, 2.5] }];
+
+      chartsElement.addEventListener('chartDataLoaded', function(e){
+        assert.deepEqual(chartsElement.series, data);
+        done();
+      });
+    });
+
+  </script>
+
+</body>
+</html>

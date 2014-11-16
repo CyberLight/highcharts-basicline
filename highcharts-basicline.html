@@ -1,0 +1,143 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../core-ajax/core-ajax.html">
+<script src="../highcharts/adapters/standalone-framework.js"></script>
+<script src="../highcharts/highcharts.js"></script>
+
+<!--
+Element providing solution to no problem in particular.
+
+##### Example
+
+    <highcharts-basicline></highcharts-basicline>
+
+@element highcharts-basicline
+@blurb Polymer Element wrapper for highcharts.js chart with type 'baseline'
+@status alpha
+@homepage http://polymerlabs.github.io/highcharts-basicline
+-->
+<polymer-element name="highcharts-basicline"
+                 attributes="width height data xcategories charttitle subtitle ytitle tooltip legend">
+
+  <template>
+
+    <link rel="stylesheet" href="highcharts-basicline.css" />
+    <div id="container" style="width:{{width}}; height:{{height}};"></div>
+    <core-ajax id="ajax" url="{{data}}"
+               handleAs="json" on-core-response="{{externalDataLoad}}">
+    </core-ajax>
+  </template>
+
+  <script>
+
+    Polymer({
+      /**
+       * The `author` attribute sets an initial author
+       *
+       * @attribute author
+       * @type string
+       * @default 'Alexander Vishnyakov'
+       */
+      author: 'Alexander Vishnyakov',
+
+      data: null,
+
+      series: null,
+
+      xcategories: null,
+
+      charttitle: '',
+
+      ytitle: '',
+
+      subtitle: '',
+
+      tooltip: null,
+
+      legend: null,
+
+      yplotlines: null,
+
+      width: '',
+
+      height: '',
+
+      ready: function() {
+
+      },
+
+      observe: {
+        data: 'loadData'
+      },
+
+      created: function(){
+        this.data = [];
+        this.series = [];
+        this.xcategories = [];
+        this.charttitle = '';
+        this.ytitle = '';
+        this.subtitle = '';
+        this.tooltip = {};
+        this.width='100%';
+        this.height='350px';
+        this.legend = {
+          layout: 'vertical',
+          align: 'right',
+          verticalAlign: 'middle',
+          borderWidth: 0
+        };
+        this.yplotlines = [{
+          value: 0,
+          width: 1,
+          color: '#808080'
+        }];
+      },
+
+      drawChart: function(){
+        var options = {
+              chart:{
+                renderTo: this.$.container
+              },
+              title: {
+                text: this.charttitle,
+                x: -20
+              },
+              subtitle: {
+                text: this.subtitle,
+                x: -20
+              },
+              xAxis: {
+                categories: this.xcategories
+              },
+              yAxis: {
+                title: {
+                  text: this.ytitle
+                },
+                plotLines: this.yplotlines
+              },
+              tooltip: this.tooltip,
+              legend: this.legend,
+              series: this.series
+          };
+        new Highcharts.Chart(options);
+      },
+
+      loadData: function(){
+        if (typeof this.data == 'string' || this.data instanceof String) {
+          this.$.ajax.go();
+        } else {
+          this.series = this.data;
+          this.drawChart();
+        }
+      },
+
+      externalDataLoad: function(e, detail, sender) {
+        this.series = detail.response;
+        this.fire('chartDataLoaded', {data: this.series});
+        this.drawChart();
+      }
+
+    });
+
+  </script>
+
+</polymer-element>

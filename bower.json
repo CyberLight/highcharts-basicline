@@ -1,0 +1,25 @@
+{
+  "name": "highcharts-basicline",
+  "version": "0.0.1",
+  "authors": [
+    "CyberLight <cyberlight@live.ru>"
+  ],
+  "description": "Polymer component for highcharts.js basicline chart",
+  "keywords": [
+    "seed",
+    "polymer",
+    "web-components"
+  ],
+  "main": "polymer-highcharts-basicline.html",
+  "license": "MIT",
+  "dependencies": {
+    "core-component-page": "Polymer/core-component-page#^0.5.1",
+    "polymer": "Polymer/polymer#^0.5.1",
+    "core-ajax": "Polymer/core-ajax#~0.5.1",
+    "highcharts": "~4.0.4",
+    "webcomponentsjs": "polymer/webcomponentsjs#^0.5.1"
+  },
+  "devDependencies": {
+    "polymer-test-tools": "Polymer/polymer-test-tools#^0.5.1"
+  }
+}

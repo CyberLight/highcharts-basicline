@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>polymer-highcharts-basicline</title>
+
+  <script src="../../webcomponentsjs/webcomponents.js"></script>
+  <link rel="import" href="../../polymer-test-tools/tools.html">
+  <script src="../../polymer-test-tools/htmltest.js"></script>
+
+  <!-- Step 1: import the element to test -->
+  <link rel="import" href="../highcharts-basicline.html">
+
+</head>
+<body>
+
+<highcharts-basicline width='50%'
+                      height='400px'
+                      charttitle='Monthly Average Temperature'
+                      subtitle='Source: weather.com'
+                      xcategories='[ "Jan", "Feb", "Mar" ]'
+                      ytitle='Temperature (°C)'
+                      tooltip='{ "valueSuffix": "°C" }'
+                      data='[{ "name": "Tokyo", "data": [ 7.0, 6.9, 9.5 ] }, { "name": "Moscow", "data": [ 4.0, 10.9, 2.5 ] }]'>
+
+</highcharts-basicline>
+
+  <script>
+
+    document.addEventListener('polymer-ready', function() {
+      var chartsElement = document.querySelector('highcharts-basicline');
+      var data = [{ "name": "Tokyo", "data": [ 7.0, 6.9, 9.5 ], "_colorIndex":0,"_symbolIndex":0 },
+                  { "name": "Moscow", "data": [ 4.0, 10.9, 2.5], "_colorIndex":1,"_symbolIndex":1 }];
+      assert.equal(chartsElement.title, '');
+      assert.equal(chartsElement.width, '50%');
+      assert.equal(chartsElement.height, '400px');
+      assert.equal(chartsElement.charttitle, 'Monthly Average Temperature');
+      assert.equal(chartsElement.subtitle, 'Source: weather.com');
+      assert.deepEqual(chartsElement.xcategories, [ "Jan", "Feb", "Mar" ]);
+      assert.equal(chartsElement.ytitle, 'Temperature (°C)');
+      assert.deepEqual(chartsElement.tooltip, { "valueSuffix": "°C" });
+      assert.deepEqual(chartsElement.data, data);
+      done();
+    });
+
+  </script>
+
+</body>
+</html>
