@@ -28,9 +28,9 @@
 
     document.addEventListener('polymer-ready', function() {
       var chartsElement = document.querySelector('highcharts-basicline');
-      var series = [{ "name": "Tokyo", "data": [ 7.0, 6.9, 9.5 ] },
-                    { "name": "Moscow", "data": [ 4.0, 10.9, 2.5 ] }];
-      var xcategories = [ "Jan", "Feb", "Mar" ];
+      var series = [{ "name": "Tokyo", "data": [ 3.0, 6.9, 9.5 ] },
+                    { "name": "Moscow", "data": [ 4.0, 5.9, 2.5 ] }];
+      var xcategories = [ "Mar", "Apr", "May" ];
 
       chartsElement.addEventListener('chartDataLoaded', function(e){
         assert.deepEqual(chartsElement.xcategories, xcategories);

@@ -141,7 +141,6 @@ Element providing solution to no problem in particular.
 
       externalDataLoad: function(e, detail, sender) {
         this.parseData(detail.response);
-        console.log(JSON.stringify(this.xcategories));
         this.fire('chartDataLoaded', {data: this.series});
         this.drawChart();
       }
