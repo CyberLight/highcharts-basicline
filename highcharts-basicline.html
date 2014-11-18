@@ -122,16 +122,26 @@ Element providing solution to no problem in particular.
       },
 
       loadData: function(){
-        if (typeof this.data == 'string' || this.data instanceof String) {
+        this.parseData(this.data);
+        this.drawChart();
+      },
+
+      parseData: function(data){
+        if (typeof data == 'string' || data instanceof String) {
           this.$.ajax.go();
         } else {
-          this.series = this.data;
-          this.drawChart();
+          if(Array.isArray(data)) {
+            this.series = data;
+          }else{
+            this.series = data.series || [];
+            this.xcategories = data.xcategories || []
+          }
         }
       },
 
       externalDataLoad: function(e, detail, sender) {
-        this.series = detail.response;
+        this.parseData(detail.response);
+        console.log(JSON.stringify(this.xcategories));
         this.fire('chartDataLoaded', {data: this.series});
         this.drawChart();
       }

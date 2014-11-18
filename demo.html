@@ -32,7 +32,15 @@
                         xcategories='[ "Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ]'
                         ytitle='Temperature (°C)'
                         tooltip='{ "valueSuffix": "°C" }'
-                        data='temperatures.json'>
+                        data='test/temperatures.json'>
+  </highcharts-basicline>
+
+  <highcharts-basicline style="width:50%"
+                        charttitle="Monthly Average Temperature (With xcategories in data)"
+                        subtitle="Source: WorldClimate.com"
+                        ytitle='Temperature (°C)'
+                        tooltip='{ "valueSuffix": "°C" }'
+                        data='test/temperatures_with_xcategories.json'>
   </highcharts-basicline>
 
 </body>

@@ -18,10 +18,9 @@
                       height='400px'
                       charttitle='Monthly Average Temperature'
                       subtitle='Source: weather.com'
-                      xcategories='[ "Jan", "Feb", "Mar" ]'
                       ytitle='Temperature (°C)'
                       tooltip='{ "valueSuffix": "°C" }'
-                      data='temperatures.json'>
+                      data='temperatures_with_xcategories.json'>
 
 </highcharts-basicline>
 
@@ -29,11 +28,13 @@
 
     document.addEventListener('polymer-ready', function() {
       var chartsElement = document.querySelector('highcharts-basicline');
-      var data = [{ "name": "Tokyo", "data": [ 7.0, 6.9, 9.5 ] },
-                       { "name": "Moscow", "data": [ 4.0, 10.9, 2.5] }];
+      var series = [{ "name": "Tokyo", "data": [ 7.0, 6.9, 9.5 ] },
+                    { "name": "Moscow", "data": [ 4.0, 10.9, 2.5 ] }];
+      var xcategories = [ "Jan", "Feb", "Mar" ];
 
       chartsElement.addEventListener('chartDataLoaded', function(e){
-        assert.deepEqual(chartsElement.series, data);
+        assert.deepEqual(chartsElement.xcategories, xcategories);
+        assert.deepEqual(chartsElement.series, series);
         done();
       });
     });
